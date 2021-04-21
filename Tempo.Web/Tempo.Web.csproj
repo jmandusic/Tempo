@@ -27,8 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gymify.Data\Gymify.Data.csproj" />
-    <ProjectReference Include="..\Gymify.Domain\Gymify.Domain.csproj" />
+    <ProjectReference Include="..\Tempo.Data\Tempo.Data.csproj" />
+    <ProjectReference Include="..\Tempo.Domain\Tempo.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

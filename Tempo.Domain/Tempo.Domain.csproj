@@ -10,7 +10,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gymify.Data\Gymify.Data.csproj" />
+    <ProjectReference Include="..\Tempo.Data\Tempo.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\Implementations\" />
+    <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Services\Implementations\" />
+    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
 </Project>

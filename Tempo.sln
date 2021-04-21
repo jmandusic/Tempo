@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gymify.Web", "Gymify.Web.csproj", "{F13B447A-7518-46FE-A27A-952AACBCAD31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempo.Web", "Tempo.Web\Tempo.Web.csproj", "{F13B447A-7518-46FE-A27A-952AACBCAD31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gymify.Domain", "..\Gymify.Domain\Gymify.Domain.csproj", "{560F64AD-C33C-4236-9E00-3945160BCEF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempo.Domain", "Tempo.Domain\Tempo.Domain.csproj", "{560F64AD-C33C-4236-9E00-3945160BCEF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gymify.Data", "..\Gymify.Data\Gymify.Data.csproj", "{94E15552-4437-4FAC-81BB-F334C8CAEFA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tempo.Data", "Tempo.Data\Tempo.Data.csproj", "{94E15552-4437-4FAC-81BB-F334C8CAEFA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
