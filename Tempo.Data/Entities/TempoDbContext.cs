@@ -1,5 +1,7 @@
 ﻿using Gymify.Data.Entities.Models;
+using Gymify.Data.Enums;
 using Microsoft.EntityFrameworkCore;
+using Tempo.Data.Entities.Models;
 
 namespace Gymify.Data.Entities
 {
@@ -9,7 +11,7 @@ namespace Gymify.Data.Entities
         {
         }
 
-
+        public DbSet<User> Users { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<RegularUser> RegularUsers { get; set; }
@@ -19,6 +21,12 @@ namespace Gymify.Data.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasDiscriminator(u => u.Role)
+                .HasValue<RegularUser>(Role.RegularUser)
+                .HasValue<Employee>(Role.Employee)
+                .HasValue<Admin>(Role.Admin);
+
             base.OnModelCreating(modelBuilder);
         }
     }

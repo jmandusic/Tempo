@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Tempo.Data.Migrations
 {
     [DbContext(typeof(TempoDbContext))]
-    [Migration("20210421112723_TempoDb")]
-    partial class TempoDb
+    [Migration("20210421124709_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,80 +20,6 @@ namespace Tempo.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Gymify.Data.Entities.Models.Admin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Oib")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Admins");
-                });
-
-            modelBuilder.Entity("Gymify.Data.Entities.Models.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("EmployeeRole")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GymId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("HiredOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Oib")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("PricePerHour")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GymId");
-
-                    b.ToTable("Employees");
-                });
 
             modelBuilder.Entity("Gymify.Data.Entities.Models.Gym", b =>
                 {
@@ -159,33 +85,23 @@ namespace Tempo.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdminId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RegularUserId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("SentOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminId");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("RegularUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notificiations");
                 });
 
-            modelBuilder.Entity("Gymify.Data.Entities.Models.RegularUser", b =>
+            modelBuilder.Entity("Tempo.Data.Entities.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -212,16 +128,44 @@ namespace Tempo.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RegularUsers");
+                    b.ToTable("Users");
+
+                    b.HasDiscriminator<int>("Role");
+                });
+
+            modelBuilder.Entity("Gymify.Data.Entities.Models.Admin", b =>
+                {
+                    b.HasBaseType("Tempo.Data.Entities.Models.User");
+
+                    b.HasDiscriminator().HasValue(0);
                 });
 
             modelBuilder.Entity("Gymify.Data.Entities.Models.Employee", b =>
                 {
-                    b.HasOne("Gymify.Data.Entities.Models.Gym", "Gym")
-                        .WithMany("Employees")
-                        .HasForeignKey("GymId");
+                    b.HasBaseType("Tempo.Data.Entities.Models.User");
 
-                    b.Navigation("Gym");
+                    b.Property<int>("EmployeeRole")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GymId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("HiredOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("PricePerHour")
+                        .HasColumnType("real");
+
+                    b.HasIndex("GymId");
+
+                    b.HasDiscriminator().HasValue(1);
+                });
+
+            modelBuilder.Entity("Gymify.Data.Entities.Models.RegularUser", b =>
+                {
+                    b.HasBaseType("Tempo.Data.Entities.Models.User");
+
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("Gymify.Data.Entities.Models.Gym", b =>
@@ -250,33 +194,20 @@ namespace Tempo.Data.Migrations
 
             modelBuilder.Entity("Gymify.Data.Entities.Models.Notificiation", b =>
                 {
-                    b.HasOne("Gymify.Data.Entities.Models.Admin", "Admin")
+                    b.HasOne("Tempo.Data.Entities.Models.User", "User")
                         .WithMany("Notificiations")
-                        .HasForeignKey("AdminId");
+                        .HasForeignKey("UserId");
 
-                    b.HasOne("Gymify.Data.Entities.Models.Employee", "Employee")
-                        .WithMany("Notificiations")
-                        .HasForeignKey("EmployeeId");
-
-                    b.HasOne("Gymify.Data.Entities.Models.RegularUser", "RegularUser")
-                        .WithMany("Notificiations")
-                        .HasForeignKey("RegularUserId");
-
-                    b.Navigation("Admin");
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("RegularUser");
-                });
-
-            modelBuilder.Entity("Gymify.Data.Entities.Models.Admin", b =>
-                {
-                    b.Navigation("Notificiations");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Gymify.Data.Entities.Models.Employee", b =>
                 {
-                    b.Navigation("Notificiations");
+                    b.HasOne("Gymify.Data.Entities.Models.Gym", "Gym")
+                        .WithMany("Employees")
+                        .HasForeignKey("GymId");
+
+                    b.Navigation("Gym");
                 });
 
             modelBuilder.Entity("Gymify.Data.Entities.Models.Gym", b =>
@@ -286,11 +217,14 @@ namespace Tempo.Data.Migrations
                     b.Navigation("GymUsers");
                 });
 
+            modelBuilder.Entity("Tempo.Data.Entities.Models.User", b =>
+                {
+                    b.Navigation("Notificiations");
+                });
+
             modelBuilder.Entity("Gymify.Data.Entities.Models.RegularUser", b =>
                 {
                     b.Navigation("GymUsers");
-
-                    b.Navigation("Notificiations");
                 });
 #pragma warning restore 612, 618
         }
