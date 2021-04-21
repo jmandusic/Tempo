@@ -1,6 +1,5 @@
-﻿using Gymify.Data.Entities.Models;
-using Gymify.Data.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Tempo.Data.Enums;
 
 namespace Tempo.Data.Entities.Models
 {

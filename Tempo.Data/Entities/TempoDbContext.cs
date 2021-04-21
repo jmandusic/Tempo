@@ -1,9 +1,8 @@
-﻿using Gymify.Data.Entities.Models;
-using Gymify.Data.Enums;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Tempo.Data.Entities.Models;
+using Tempo.Data.Enums;
 
-namespace Gymify.Data.Entities
+namespace Tempo.Data.Entities
 {
     public class TempoDbContext : DbContext
     {
@@ -23,7 +22,7 @@ namespace Gymify.Data.Entities
         {
             modelBuilder.Entity<User>()
                 .HasDiscriminator(u => u.Role)
-                .HasValue<RegularUser>(Role.RegularUser)
+                .HasValue<RegularUser>(Role.Admin)
                 .HasValue<Employee>(Role.Employee)
                 .HasValue<Admin>(Role.Admin);
 

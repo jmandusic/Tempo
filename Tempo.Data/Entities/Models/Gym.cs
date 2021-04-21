@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Gymify.Data.Entities.Models
+namespace Tempo.Data.Entities.Models
 {
     public class Gym
     {

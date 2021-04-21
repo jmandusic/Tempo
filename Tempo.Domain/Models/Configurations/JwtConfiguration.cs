@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Gymify.Domain.Models.Configurations
+namespace Tempo.Domain.Models.Configurations
 {
     public class JwtConfiguration
     {

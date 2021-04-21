@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gymify.Domain.Abstractions
+﻿namespace Tempo.Domain.Abstractions
 {
     public class ResponseResult
     {

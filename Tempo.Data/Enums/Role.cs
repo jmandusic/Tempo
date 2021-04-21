@@ -1,4 +1,4 @@
-﻿namespace Gymify.Data.Enums
+﻿namespace Tempo.Data.Enums
 {
     public enum Role
     {

@@ -1,7 +1,6 @@
 ﻿using System;
-using Tempo.Data.Entities.Models;
 
-namespace Gymify.Data.Entities.Models
+namespace Tempo.Data.Entities.Models
 {
     public class Notificiation
     {

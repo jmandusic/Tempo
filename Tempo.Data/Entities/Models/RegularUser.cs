@@ -1,8 +1,6 @@
-﻿using Gymify.Data.Enums;
-using System.Collections.Generic;
-using Tempo.Data.Entities.Models;
+﻿using System.Collections.Generic;
 
-namespace Gymify.Data.Entities.Models
+namespace Tempo.Data.Entities.Models
 {
     public class RegularUser : User
     {
