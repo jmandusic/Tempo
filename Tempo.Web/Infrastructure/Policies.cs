@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Gymify.Web.Infrastructure
+﻿namespace Tempo.Web.Infrastructure
 {
     public static class Policies
     {

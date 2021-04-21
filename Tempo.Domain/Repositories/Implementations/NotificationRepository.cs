@@ -1,10 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Tempo.Data.Entities;
+using Tempo.Domain.Repositories.Interfaces;
+using Tempo.Domain.Services.Interfaces;
 
 namespace Tempo.Domain.Repositories.Implementations
 {
-    class NotificationRepository
+    public class NotificationRepository : INotificationRepository
     {
+        private readonly TempoDbContext _dbContext;
+        private readonly IClaimProvider _claimProvider;
+
+        public NotificationRepository(TempoDbContext dbContext, IClaimProvider claimProvider)
+        {
+            _dbContext = dbContext;
+            _claimProvider = claimProvider;
+        }
     }
 }

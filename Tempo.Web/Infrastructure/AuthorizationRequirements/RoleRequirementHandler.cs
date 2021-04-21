@@ -1,10 +1,10 @@
-﻿using Gymify.Data.Enums;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Tempo.Data.Enums;
 
-namespace Gymify.Web.Infrastructure.AuthorizationRequirements
+namespace Tempo.Web.Infrastructure.AuthorizationRequirements
 {
     public class RoleRequirementHandler : AuthorizationHandler<RoleRequirement>
     {

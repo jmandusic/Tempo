@@ -1,8 +1,3 @@
-using Gymify.Data.Entities;
-using Gymify.Data.Enums;
-using Gymify.Domain.Models.Configurations;
-using Gymify.Web.Infrastructure;
-using Gymify.Web.Infrastructure.AuthorizationRequirements;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -15,8 +10,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using Tempo.Data.Entities;
+using Tempo.Data.Enums;
+using Tempo.Domain.Models.Configurations;
+using Tempo.Web.Infrastructure;
+using Tempo.Web.Infrastructure.AuthorizationRequirements;
 
-namespace Gymify.Web
+namespace Tempo.Web
 {
     public class Startup
     {

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tempo.Domain.Repositories.Interfaces
+﻿namespace Tempo.Domain.Repositories.Interfaces
 {
-    interface IAdminRepository
+    public interface IAdminRepository
     {
     }
 }

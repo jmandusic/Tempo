@@ -1,7 +1,7 @@
-﻿using Gymify.Data.Enums;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Tempo.Data.Enums;
 
-namespace Gymify.Web.Infrastructure.AuthorizationRequirements
+namespace Tempo.Web.Infrastructure.AuthorizationRequirements
 {
     public class RoleRequirement : IAuthorizationRequirement
     {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Tempo.Domain.Repositories.Interfaces;
 
 namespace Tempo.Domain.Repositories.Implementations
 {
-    interface RegularUserRepository
+    public class RegularUserRepository : IRegularUserRepository
     {
     }
 }

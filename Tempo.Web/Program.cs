@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Gymify.Web
+namespace Tempo.Web
 {
     public class Program
     {

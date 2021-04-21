@@ -1,5 +1,5 @@
-﻿using Gymify.Data.Enums;
-using System;
+﻿using System;
+using Tempo.Data.Enums;
 
 namespace Tempo.Data.Entities.Models
 {
