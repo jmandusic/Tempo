@@ -22,7 +22,7 @@ namespace Tempo.Data.Entities
         {
             modelBuilder.Entity<User>()
                 .HasDiscriminator(u => u.Role)
-                .HasValue<RegularUser>(Role.Admin)
+                .HasValue<RegularUser>(Role.RegularUser)
                 .HasValue<Employee>(Role.Employee)
                 .HasValue<Admin>(Role.Admin);
 
