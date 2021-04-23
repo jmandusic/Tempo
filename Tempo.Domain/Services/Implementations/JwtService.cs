@@ -9,10 +9,11 @@ using Tempo.Data.Entities.Models;
 using Tempo.Domain.Constants;
 using Tempo.Domain.Models.Configurations;
 using Tempo.Domain.Repositories.Interfaces;
+using Tempo.Domain.Services.Interfaces;
 
 namespace Tempo.Domain.Services.Implementations
 {
-    public class JwtService
+    public class JwtService : IJwtService
     {
         private static DateTime GetUtcBaseDateTime => new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         private static double GetCurrentSeconds => (DateTime.UtcNow - GetUtcBaseDateTime).TotalSeconds;
@@ -58,7 +59,7 @@ namespace Tempo.Domain.Services.Implementations
 
             var user = _userRepository.GetUser(userId);
             return GetJwtTokenForUser(user);
-        }
+        } 
     }
 }
 

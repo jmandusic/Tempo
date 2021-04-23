@@ -1,11 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Tempo.Domain.Repositories.Interfaces;
+using Tempo.Web.Infrastructure;
 
 namespace Tempo.Web.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AdminController : ControllerBase
+    [Authorize(Policy = Policies.Admin)]
+    public class AdminController : ApiController
     {
+        private readonly IAdminRepository _adminRepository;
 
+        public AdminController(IAdminRepository adminRepository)
+        {
+            _adminRepository = adminRepository;
+        }
     }
 }

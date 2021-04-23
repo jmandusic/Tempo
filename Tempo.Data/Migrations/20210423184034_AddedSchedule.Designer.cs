@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tempo.Data.Entities;
 
 namespace Tempo.Data.Migrations
 {
     [DbContext(typeof(TempoDbContext))]
-    partial class TempoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210423184034_AddedSchedule")]
+    partial class AddedSchedule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +29,6 @@ namespace Tempo.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AdminId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Capacity")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactEmail")

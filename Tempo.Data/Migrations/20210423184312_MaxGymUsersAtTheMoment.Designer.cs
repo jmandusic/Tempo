@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tempo.Data.Entities;
 
 namespace Tempo.Data.Migrations
 {
     [DbContext(typeof(TempoDbContext))]
-    partial class TempoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210423184312_MaxGymUsersAtTheMoment")]
+    partial class MaxGymUsersAtTheMoment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace Tempo.Data.Migrations
                     b.Property<int?>("AdminId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
                     b.Property<string>("ContactEmail")
                         .HasColumnType("nvarchar(max)");
 
@@ -40,6 +39,9 @@ namespace Tempo.Data.Migrations
 
                     b.Property<float>("Longitude")
                         .HasColumnType("real");
+
+                    b.Property<int>("MaxNumberOfUsersAtTheMoment")
+                        .HasColumnType("int");
 
                     b.Property<float>("MembershipFee")
                         .HasColumnType("real");

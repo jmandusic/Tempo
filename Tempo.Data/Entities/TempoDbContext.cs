@@ -17,14 +17,15 @@ namespace Tempo.Data.Entities
         public DbSet<GymUser> GymUsers { get; set; }
         public DbSet<Gym> Gyms { get; set; }
         public DbSet<Notificiation> Notificiations { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
                 .HasDiscriminator(u => u.Role)
-                .HasValue<RegularUser>(Role.RegularUser)
+                .HasValue<Admin>(Role.Admin)
                 .HasValue<Employee>(Role.Employee)
-                .HasValue<Admin>(Role.Admin);
+                .HasValue<RegularUser>(Role.RegularUser);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -13,6 +13,10 @@ using Newtonsoft.Json.Serialization;
 using Tempo.Data.Entities;
 using Tempo.Data.Enums;
 using Tempo.Domain.Models.Configurations;
+using Tempo.Domain.Repositories.Implementations;
+using Tempo.Domain.Repositories.Interfaces;
+using Tempo.Domain.Services.Implementations;
+using Tempo.Domain.Services.Interfaces;
 using Tempo.Web.Infrastructure;
 using Tempo.Web.Infrastructure.AuthorizationRequirements;
 
@@ -65,11 +69,16 @@ namespace Tempo.Web
 
             services.Configure<JwtConfiguration>(Configuration.GetSection(nameof(JwtConfiguration)));
 
-            //services.AddTransient<IClaimProvider, ClaimProvider>();
-            //services.AddTransient<IJwtService, JwtService>();
-            //
-            //services.AddTransient<IUserRepository, UserRepository>();
-            //services.AddTransient<IStudentRepository, StudentRepository>();
+            services.AddTransient<IClaimProvider, ClaimProvider>();
+            services.AddTransient<IJwtService, JwtService>();
+
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IAdminRepository, AdminRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IRegularUserRepository, RegularUserRepository>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
+            services.AddTransient<IGymRepository, GymRepository>();
+            services.AddTransient<IScheduleRepository, ScheduleRepository>();
 
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
