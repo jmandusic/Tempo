@@ -1,0 +1,22 @@
+.landing__page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #222222;
+}
+
+.landing__page-logo {
+  width: 250px;
+  height: 250px;
+  animation: pulse 1s infinite;
+  opacity: 0.8;
+}
+
+@keyframes pulse {
+  10% {
+    transform: scale(1.2);
+    opacity: 1.2;
+  }
+}
