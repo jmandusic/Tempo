@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tempo.Data.Entities;
 
 namespace Tempo.Data.Migrations
 {
     [DbContext(typeof(TempoDbContext))]
-    partial class TempoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210424125109_AdressAndGymWorkingTime")]
+    partial class AdressAndGymWorkingTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,15 +221,6 @@ namespace Tempo.Data.Migrations
             modelBuilder.Entity("Tempo.Data.Entities.Models.RegularUser", b =>
                 {
                     b.HasBaseType("Tempo.Data.Entities.Models.User");
-
-                    b.Property<int?>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<float?>("Height")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Weight")
-                        .HasColumnType("real");
 
                     b.HasDiscriminator().HasValue(2);
                 });

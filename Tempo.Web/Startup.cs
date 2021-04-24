@@ -34,8 +34,6 @@ namespace Tempo.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            System.Console.WriteLine(Configuration.GetConnectionString("Gymify"));
-
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
 
@@ -79,7 +77,6 @@ namespace Tempo.Web
             services.AddTransient<INotificationRepository, NotificationRepository>();
             services.AddTransient<IGymRepository, GymRepository>();
             services.AddTransient<IScheduleRepository, ScheduleRepository>();
-
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 {

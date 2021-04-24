@@ -1,4 +1,7 @@
-﻿namespace Tempo.Domain.Models.ViewModels
+﻿using System;
+using Tempo.Data.Entities.Models;
+
+namespace Tempo.Domain.Models.ViewModels
 {
     public class GymModel
     {
@@ -9,5 +12,8 @@
         public float Longitude { get; set; }
         public float Latitude { get; set; }
         public int Capacity { get; set; }
+        public DateTime StartOfWork { get; set; }
+        public DateTime EndOfWork { get; set; }
+        public Adress Adress { get; set; }
     }
 }

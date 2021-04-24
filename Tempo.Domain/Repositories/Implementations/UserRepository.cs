@@ -56,8 +56,7 @@ namespace Tempo.Domain.Repositories.Implementations
                 {
                     Id = u.Id,
                     Email = u.Email,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName
+                    Name = u.Name,
                 })
                 .SingleOrDefault();
 

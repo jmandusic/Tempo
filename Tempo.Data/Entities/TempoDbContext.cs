@@ -18,6 +18,7 @@ namespace Tempo.Data.Entities
         public DbSet<Gym> Gyms { get; set; }
         public DbSet<Notificiation> Notificiations { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Adress> Adresses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

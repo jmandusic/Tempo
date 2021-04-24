@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Tempo.Data.Entities.Models
 {
@@ -12,6 +13,11 @@ namespace Tempo.Data.Entities.Models
         public float Longitude { get; set; }
         public float Latitude { get; set; }
         public int Capacity { get; set; }
+        public DateTime StartOfWork { get; set; }
+        public DateTime EndOfWork { get; set; }
+
+        public int? AdressId { get; set; }
+        public Adress Adress { get; set; }
 
         public int? AdminId { get; set; }
         public Admin Admin { get; set; }
