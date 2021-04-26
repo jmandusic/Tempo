@@ -38,6 +38,22 @@ namespace Tempo.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Adresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Split",
+                            Street = "Put Brodarice",
+                            StreetNumber = 6
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Split",
+                            Street = "Ul. Bilice II",
+                            StreetNumber = 53
+                        });
                 });
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.Gym", b =>
@@ -87,6 +103,38 @@ namespace Tempo.Data.Migrations
                     b.HasIndex("AdressId");
 
                     b.ToTable("Gyms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AdminId = 1,
+                            AdressId = 1,
+                            Capacity = 120,
+                            ContactEmail = "joker@mail.com",
+                            EndOfWork = new DateTime(1, 1, 1, 0, 0, 0, 165, DateTimeKind.Unspecified).AddTicks(6000),
+                            Latitude = 43.51985f,
+                            Longitude = 16.447258f,
+                            MembershipFee = 250f,
+                            Name = "Fitness Centar Joker",
+                            Rating = 4.6f,
+                            StartOfWork = new DateTime(1, 1, 1, 0, 0, 0, 57, DateTimeKind.Unspecified).AddTicks(6000)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AdminId = 2,
+                            AdressId = 2,
+                            Capacity = 200,
+                            ContactEmail = "guliver@mail.com",
+                            EndOfWork = new DateTime(1, 1, 1, 0, 0, 0, 165, DateTimeKind.Unspecified).AddTicks(6000),
+                            Latitude = 43.529247f,
+                            Longitude = 16.491226f,
+                            MembershipFee = 200f,
+                            Name = "Guliver energija",
+                            Rating = 4.7f,
+                            StartOfWork = new DateTime(1, 1, 1, 0, 0, 0, 57, DateTimeKind.Unspecified).AddTicks(6000)
+                        });
                 });
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.GymUser", b =>
@@ -193,6 +241,26 @@ namespace Tempo.Data.Migrations
                     b.HasBaseType("Tempo.Data.Entities.Models.User");
 
                     b.HasDiscriminator().HasValue(0);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "adminJ@mail.com",
+                            Name = "Mate",
+                            Oib = "28903610827",
+                            Password = "adminJoker",
+                            Role = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "adminG@mail.com",
+                            Name = "Ivan",
+                            Oib = "10927489362",
+                            Password = "adminGuliver",
+                            Role = 0
+                        });
                 });
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.Employee", b =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tempo.Data.Entities.Models;
 using Tempo.Data.Enums;
+using Tempo.Data.Seed;
 
 namespace Tempo.Data.Entities
 {
@@ -27,6 +28,8 @@ namespace Tempo.Data.Entities
                 .HasValue<Admin>(Role.Admin)
                 .HasValue<Employee>(Role.Employee)
                 .HasValue<RegularUser>(Role.RegularUser);
+
+            DatabaseSeed.Seed(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }

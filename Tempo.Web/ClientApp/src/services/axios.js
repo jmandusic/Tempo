@@ -20,10 +20,10 @@ const configureAxios = () => {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
+      console.log(error.response.status);
       let originalRequest = error.config;
       const token = localStorage.getItem("token");
-        if (error.response && error.response.status === 401 && !token) {
-        console.log("prvi if");
+      if (error.response && error.response.status === 401 && !token) {
         history.push("/login");
 
         return Promise.reject(error);
@@ -33,17 +33,17 @@ const configureAxios = () => {
         originalRequest &&
         !originalRequest._isRetryRequest &&
         token
-        ) {
-        console.log("drugi if");
+      ) {
         originalRequest._isRetryRequest = true;
 
         return newToken(token).then(({ data }) => {
           if (!data) {
             handleRedirectToLogin();
 
-            return Promise.reject(error);
+            return;
           }
           localStorage.setItem("token", data);
+
           return axios(originalRequest);
         });
       } else if (
@@ -51,15 +51,15 @@ const configureAxios = () => {
         error.response.status === 401 &&
         originalRequest &&
         originalRequest._isRetryRequest
-        ) {
-        console.log("treci if");
+      ) {
         handleRedirectToLogin();
-        return Promise.reject(error);
       }
 
       return Promise.reject(error);
     }
   );
 };
+
+export default configureAxios;
 
 export default configureAxios;
