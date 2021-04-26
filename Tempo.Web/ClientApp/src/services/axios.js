@@ -22,7 +22,8 @@ const configureAxios = () => {
     (error) => {
       let originalRequest = error.config;
       const token = localStorage.getItem("token");
-      if (error.response && error.response.status === 401 && !token) {
+        if (error.response && error.response.status === 401 && !token) {
+        console.log("prvi if");
         history.push("/login");
 
         return Promise.reject(error);
@@ -32,17 +33,17 @@ const configureAxios = () => {
         originalRequest &&
         !originalRequest._isRetryRequest &&
         token
-      ) {
+        ) {
+        console.log("drugi if");
         originalRequest._isRetryRequest = true;
 
         return newToken(token).then(({ data }) => {
           if (!data) {
             handleRedirectToLogin();
 
-            return;
+            return Promise.reject(error);
           }
           localStorage.setItem("token", data);
-
           return axios(originalRequest);
         });
       } else if (
@@ -50,8 +51,10 @@ const configureAxios = () => {
         error.response.status === 401 &&
         originalRequest &&
         originalRequest._isRetryRequest
-      ) {
+        ) {
+        console.log("treci if");
         handleRedirectToLogin();
+        return Promise.reject(error);
       }
 
       return Promise.reject(error);

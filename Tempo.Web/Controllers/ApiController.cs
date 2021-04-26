@@ -5,7 +5,7 @@ namespace Tempo.Web.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[Controller]")]
     public class ApiController : ControllerBase
     {
     }

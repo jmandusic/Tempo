@@ -74,9 +74,9 @@ namespace Tempo.Web
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<IRegularUserRepository, RegularUserRepository>();
-            services.AddTransient<INotificationRepository, NotificationRepository>();
             services.AddTransient<IGymRepository, GymRepository>();
             services.AddTransient<IScheduleRepository, ScheduleRepository>();
+
             services.AddControllers()
                 .AddNewtonsoftJson(options =>
                 {
@@ -92,21 +92,14 @@ namespace Tempo.Web
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
-            }
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
