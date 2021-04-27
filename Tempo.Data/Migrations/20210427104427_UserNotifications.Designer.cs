@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tempo.Data.Entities;
 
 namespace Tempo.Data.Migrations
 {
     [DbContext(typeof(TempoDbContext))]
-    partial class TempoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210427104427_UserNotifications")]
+    partial class UserNotifications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,7 @@ namespace Tempo.Data.Migrations
                     b.ToTable("GymUsers");
                 });
 
-            modelBuilder.Entity("Tempo.Data.Entities.Models.Notification", b =>
+            modelBuilder.Entity("Tempo.Data.Entities.Models.Notificiation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,6 +249,9 @@ namespace Tempo.Data.Migrations
                     b.Property<int?>("NotificationId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("NotificiationId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Opened")
                         .HasColumnType("bit");
 
@@ -255,7 +260,7 @@ namespace Tempo.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NotificationId");
+                    b.HasIndex("NotificiationId");
 
                     b.HasIndex("UserId");
 
@@ -378,15 +383,15 @@ namespace Tempo.Data.Migrations
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.UserNotification", b =>
                 {
-                    b.HasOne("Tempo.Data.Entities.Models.Notification", "Notification")
+                    b.HasOne("Tempo.Data.Entities.Models.Notificiation", "Notificiation")
                         .WithMany("UserNotifications")
-                        .HasForeignKey("NotificationId");
+                        .HasForeignKey("NotificiationId");
 
                     b.HasOne("Tempo.Data.Entities.Models.User", "User")
                         .WithMany("UserNotifications")
                         .HasForeignKey("UserId");
 
-                    b.Navigation("Notification");
+                    b.Navigation("Notificiation");
 
                     b.Navigation("User");
                 });
@@ -416,7 +421,7 @@ namespace Tempo.Data.Migrations
                     b.Navigation("Schedules");
                 });
 
-            modelBuilder.Entity("Tempo.Data.Entities.Models.Notification", b =>
+            modelBuilder.Entity("Tempo.Data.Entities.Models.Notificiation", b =>
                 {
                     b.Navigation("UserNotifications");
                 });

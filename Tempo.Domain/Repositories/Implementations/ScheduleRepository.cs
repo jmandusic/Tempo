@@ -1,4 +1,8 @@
-﻿using Tempo.Data.Entities;
+﻿using System.Linq;
+using Tempo.Data.Entities;
+using Tempo.Data.Entities.Models;
+using Tempo.Domain.Abstractions;
+using Tempo.Domain.Models.ViewModels;
 using Tempo.Domain.Repositories.Interfaces;
 using Tempo.Domain.Services.Interfaces;
 
@@ -7,12 +11,29 @@ namespace Tempo.Domain.Repositories.Implementations
     public class ScheduleRepository : IScheduleRepository
     {
         private readonly TempoDbContext _dbContext;
-        private readonly IClaimProvider _claimProvider;
 
-        public ScheduleRepository(TempoDbContext dbContext, IClaimProvider claimProvider)
+        public ScheduleRepository(TempoDbContext dbContext)
         {
             _dbContext = dbContext;
-            _claimProvider = claimProvider;
+        }
+
+        public ResponseResult ReserveSchedule(ScheduleModel scheduleModel, RegularUserModel regularUser)
+        {
+            var user = _dbContext.RegularUsers.FirstOrDefault(u => u.Id == regularUser.Id);
+            if (user == null)
+                return ResponseResult.Error("User not found");
+
+            var newSchedule = new Schedule
+            {
+                GymId = scheduleModel.Gym.Id,
+                RegularUserId = user.Id,
+                Time = scheduleModel.Time
+            };
+
+            _dbContext.Schedules.Add(newSchedule);
+            _dbContext.SaveChanges();
+
+            return ResponseResult.Ok;
         }
     }
 }

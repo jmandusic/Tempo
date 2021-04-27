@@ -17,7 +17,8 @@ namespace Tempo.Data.Entities
         public DbSet<RegularUser> RegularUsers { get; set; }
         public DbSet<GymUser> GymUsers { get; set; }
         public DbSet<Gym> Gyms { get; set; }
-        public DbSet<Notificiation> Notificiations { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
+        public DbSet<Notification> Notificiations { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Adress> Adresses { get; set; }
 
@@ -30,7 +31,6 @@ namespace Tempo.Data.Entities
                 .HasValue<RegularUser>(Role.RegularUser);
 
             DatabaseSeed.Seed(modelBuilder);
-
             base.OnModelCreating(modelBuilder);
         }
     }

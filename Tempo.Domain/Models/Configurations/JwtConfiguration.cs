@@ -6,7 +6,7 @@ namespace Tempo.Domain.Models.Configurations
     {
         public string Issuer { get; set; }
         public string AudienceId { get; set; }
-        public string AudienceSecret { get; set; } = "ajskhdaksdkas";
+        public string AudienceSecret { get; set; }
         public int ExpiryMinutes { get; set; }
 
         public byte[] GetAudienceSecretBytes() => Encoding.UTF8.GetBytes(AudienceSecret);

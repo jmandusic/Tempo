@@ -5,6 +5,7 @@ namespace Tempo.Domain.Models.ViewModels
 {
     public class GymModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public float Rating { get; set; }
         public string ContactEmail { get; set; }
@@ -14,6 +15,7 @@ namespace Tempo.Domain.Models.ViewModels
         public int Capacity { get; set; }
         public DateTime StartOfWork { get; set; }
         public DateTime EndOfWork { get; set; }
+        public Admin Admin { get; set; }
         public Adress Adress { get; set; }
     }
 }

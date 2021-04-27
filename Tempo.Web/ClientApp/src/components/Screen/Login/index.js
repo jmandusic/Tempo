@@ -5,6 +5,7 @@ import { parseJwt } from "../../../utils/jwtHelper";
 
 const Login = () => {
   const history = useHistory();
+  const [backendMessage, setBackendMessage] = useState("");
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -19,11 +20,14 @@ const Login = () => {
   };
 
   const submit = () => {
-    axios.post("api/Account/Login", user).then((res) => {
-      localStorage.setItem("token", res.data);
-      const parsedToken = parseJwt(res.data);
-      history.push(`/home/${parsedToken.role.toLowerCase()}`);
-    });
+    axios.post("api/Account/Login", user).then(
+      (res) => {
+        localStorage.setItem("token", res.data);
+        const parsedToken = parseJwt(res.data);
+        history.push(`/home/${parsedToken.role.toLowerCase()}`);
+      },
+      ({ response }) => setBackendMessage(response.data)
+    );
   };
 
   return (
@@ -31,12 +35,16 @@ const Login = () => {
       <form onSubmit={submit}>
         <label>Email</label>
         <input type="email" value={user.email} onChange={emailHanlder} />
+
         <label>Password</label>
         <input
           type="password"
           value={user.password}
           onChange={passwordHanlder}
         />
+
+        <p>{backendMessage}</p>
+
         <button type="submit">Log in</button>
       </form>
       <Link to="/register">

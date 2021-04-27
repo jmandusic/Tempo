@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tempo.Data.Entities.Models
 {
-    public class Notificiation
+    public class Notification
     {
         public int Id { get; set; }
         public string Message { get; set; }
         public DateTime SentOn { get; set; }
 
-        public int? UserId { get; set; }
-        public User User { get; set; }
+        public ICollection<UserNotification> UserNotifications { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Tempo.Data.Entities;
+﻿using System;
+using System.Linq;
+using Tempo.Data.Entities;
 using Tempo.Data.Entities.Models;
 using Tempo.Domain.Abstractions;
 using Tempo.Domain.Helpers;
@@ -28,7 +30,27 @@ namespace Tempo.Domain.Repositories.Implementations
 
             _dbContext.Add(regularUser);
             _dbContext.SaveChanges();
+
             return new ResponseResult<RegularUser>(regularUser);
+        }
+
+        public ResponseResult PayMembership(int userId, int gymId)
+        {
+            var user = _dbContext.RegularUsers.Find(userId);
+            var gym = _dbContext.Gyms.Find(gymId);
+
+            if (user == null || gym == null)
+                return ResponseResult.Error("User or gym not found");
+
+            var gymUser = _dbContext.GymUsers
+                .First(gu => gu.GymId == gymId && gu.RegularUserId == userId);
+
+            gymUser.isMembershipPayed = true;
+            gymUser.PayedOn = DateTime.Now;
+
+            _dbContext.SaveChanges();
+
+            return ResponseResult.Ok;
         }
     }
 }

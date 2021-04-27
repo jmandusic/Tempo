@@ -7,5 +7,6 @@ namespace Tempo.Domain.Repositories.Interfaces
     public interface IRegularUserRepository
     {
         ResponseResult<RegularUser> RegisterRegularUser(RegistrationModel model);
+        ResponseResult PayMembership(int userId, int gymId);
     }
 }

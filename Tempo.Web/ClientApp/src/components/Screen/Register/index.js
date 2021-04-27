@@ -6,6 +6,7 @@ import { parseJwt } from "../../../utils/jwtHelper";
 const Register = () => {
   const history = useHistory();
   const [repatedPassword, setRepeatedPassword] = useState("");
+  const [backendMessage, setBackendMessage] = useState("");
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -31,17 +32,21 @@ const Register = () => {
   const submit = (e) => {
     e.preventDefault();
 
-    console.log(user.password);
-    console.log(repatedPassword);
     if (user.password !== repatedPassword) {
       return;
     }
 
-    axios.post("api/Account/RegisterRegularUser", user).then((res) => {
-      localStorage.setItem("token", res.data);
-      const parsedToken = parseJwt(res.data);
-      history.push(`/home/${parsedToken.role.toLowerCase()}`);
-    });
+    axios.post("api/Account/RegisterRegularUser", user).then(
+      (res) => {
+        localStorage.setItem("token", res.data);
+        const parsedToken = parseJwt(res.data);
+        console.log(parsedToken, parsedToken.role);
+        history.push(`/home/${parsedToken.role.toLowerCase()}`);
+      },
+      ({ response }) => {
+        setBackendMessage(response.data);
+      }
+    );
   };
 
   return (
@@ -75,6 +80,8 @@ const Register = () => {
           onChange={repatedPasswordHandler}
           value={repatedPassword}
         />
+
+        <p>{backendMessage}</p>
 
         <button type="submit">Registriraj se</button>
       </form>

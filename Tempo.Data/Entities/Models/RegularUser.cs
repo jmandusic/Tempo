@@ -10,5 +10,6 @@ namespace Tempo.Data.Entities.Models
 
         public ICollection<GymUser> GymUsers { get; set; }
         public ICollection<Schedule> Schedules { get; set; }
+        public ICollection<RegularUser> Friends { get; set; }
     }
 }

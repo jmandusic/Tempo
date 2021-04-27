@@ -20,9 +20,12 @@ const configureAxios = () => {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
-      console.log(error.response.status);
       let originalRequest = error.config;
       const token = localStorage.getItem("token");
+      console.log("Error response: " + error.response);
+      console.log("Status: " + error.response.status);
+      console.log("Token: " + token);
+      console.log("Original res: " + originalRequest);
       if (error.response && error.response.status === 401 && !token) {
         history.push("/login");
 
@@ -36,14 +39,13 @@ const configureAxios = () => {
       ) {
         originalRequest._isRetryRequest = true;
 
-        return newToken(token).then(({ data }) => {
-          if (!data) {
+        return newToken(token).then((res) => {
+          console.log(res.data);
+          if (!res.data) {
             handleRedirectToLogin();
-
             return;
           }
-          localStorage.setItem("token", data);
-
+          localStorage.setItem("token", res.data);
           return axios(originalRequest);
         });
       } else if (
@@ -59,7 +61,5 @@ const configureAxios = () => {
     }
   );
 };
-
-export default configureAxios;
 
 export default configureAxios;

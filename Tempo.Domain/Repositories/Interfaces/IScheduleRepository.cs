@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Tempo.Domain.Abstractions;
+using Tempo.Domain.Models.ViewModels;
 
 namespace Tempo.Domain.Repositories.Interfaces
 {
     public interface IScheduleRepository
     {
+        ResponseResult ReserveSchedule(ScheduleModel scheduleModel, RegularUserModel regularUser);
     }
 }

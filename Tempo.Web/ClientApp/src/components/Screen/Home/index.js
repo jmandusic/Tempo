@@ -10,12 +10,12 @@ const Home = () => {
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
+    console.log("Url: " + window.location.pathname);
     if (window.location.pathname === "/home" && role) {
-        history.push(`/home/${role.toLowerCase()}`);
-        console.log(window.location.pathname);
+      history.push(`/home/${role.toLowerCase()}`);
     }
     axios.get("api/Account").then(({ data }) => setUserInfo(data));
-  }, []);
+  }, [role, history]);
 
   if (!role) {
     return <div>Loading...</div>;

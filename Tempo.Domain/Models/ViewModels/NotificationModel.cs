@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Tempo.Data.Entities.Models;
 
 namespace Tempo.Domain.Models.ViewModels
@@ -7,6 +8,6 @@ namespace Tempo.Domain.Models.ViewModels
     {
         public string Message { get; set; }
         public DateTime SentOn { get; set; }
-        public User User { get; set; }
+        public ICollection<User> ForUsers { get; set; }
     }
 }

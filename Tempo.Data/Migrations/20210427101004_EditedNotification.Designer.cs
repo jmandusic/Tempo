@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tempo.Data.Entities;
 
 namespace Tempo.Data.Migrations
 {
     [DbContext(typeof(TempoDbContext))]
-    partial class TempoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210427101004_EditedNotification")]
+    partial class EditedNotification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +167,7 @@ namespace Tempo.Data.Migrations
                     b.ToTable("GymUsers");
                 });
 
-            modelBuilder.Entity("Tempo.Data.Entities.Models.Notification", b =>
+            modelBuilder.Entity("Tempo.Data.Entities.Models.Notificiation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,10 +177,18 @@ namespace Tempo.Data.Migrations
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Opened")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("SentOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notificiations");
                 });
@@ -235,31 +245,6 @@ namespace Tempo.Data.Migrations
                     b.ToTable("Users");
 
                     b.HasDiscriminator<int>("Role");
-                });
-
-            modelBuilder.Entity("Tempo.Data.Entities.Models.UserNotification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("NotificationId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Opened")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NotificationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserNotifications");
                 });
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.Admin", b =>
@@ -361,6 +346,15 @@ namespace Tempo.Data.Migrations
                     b.Navigation("RegularUser");
                 });
 
+            modelBuilder.Entity("Tempo.Data.Entities.Models.Notificiation", b =>
+                {
+                    b.HasOne("Tempo.Data.Entities.Models.User", "User")
+                        .WithMany("Notificiations")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Tempo.Data.Entities.Models.Schedule", b =>
                 {
                     b.HasOne("Tempo.Data.Entities.Models.Gym", "Gym")
@@ -374,21 +368,6 @@ namespace Tempo.Data.Migrations
                     b.Navigation("Gym");
 
                     b.Navigation("RegularUSer");
-                });
-
-            modelBuilder.Entity("Tempo.Data.Entities.Models.UserNotification", b =>
-                {
-                    b.HasOne("Tempo.Data.Entities.Models.Notification", "Notification")
-                        .WithMany("UserNotifications")
-                        .HasForeignKey("NotificationId");
-
-                    b.HasOne("Tempo.Data.Entities.Models.User", "User")
-                        .WithMany("UserNotifications")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Notification");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.Employee", b =>
@@ -416,14 +395,9 @@ namespace Tempo.Data.Migrations
                     b.Navigation("Schedules");
                 });
 
-            modelBuilder.Entity("Tempo.Data.Entities.Models.Notification", b =>
-                {
-                    b.Navigation("UserNotifications");
-                });
-
             modelBuilder.Entity("Tempo.Data.Entities.Models.User", b =>
                 {
-                    b.Navigation("UserNotifications");
+                    b.Navigation("Notificiations");
                 });
 
             modelBuilder.Entity("Tempo.Data.Entities.Models.RegularUser", b =>

@@ -12,6 +12,6 @@ namespace Tempo.Data.Entities.Models
         public string Oib { get; set; }
         public Role Role { get; set; }
 
-        public ICollection<Notificiation> Notificiations { get; set; }
+        public ICollection<UserNotification> UserNotifications { get; set; }
     }
 }
