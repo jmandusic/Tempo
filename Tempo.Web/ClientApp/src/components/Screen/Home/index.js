@@ -1,21 +1,20 @@
 import { useUser } from "../../../providers/UserProvider/hooks";
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { Redirect, Route, Switch } from "react-router";
+import { Redirect, Route, Switch, useHistory } from "react-router";
+import RegularUser from "../../Authorized/RegularUser";
+import Employee from "../../Authorized/Employee";
+import Admin from "../../Authorized/Admin";
 
 const Home = () => {
   const history = useHistory();
   const [{ role, userId }, logOut] = useUser();
-  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
-    console.log("Url: " + window.location.pathname);
     if (window.location.pathname === "/home" && role) {
       history.push(`/home/${role.toLowerCase()}`);
     }
-    axios.get("api/Account").then(({ data }) => setUserInfo(data));
-  }, [role, history]);
+  }, [role]);
 
   if (!role) {
     return <div>Loading...</div>;
@@ -24,13 +23,15 @@ const Home = () => {
   return (
     <Switch>
       <Route exact path="/home/regularuser">
-        <div>Regular user</div>
+        <RegularUser />
       </Route>
+
       <Route exact path="/home/mentor">
-        <div>Employee</div>
+        <Employee />
       </Route>
+
       <Route exact path="/home/admin">
-        <div>Admin</div>
+        <Admin />
       </Route>
     </Switch>
   );

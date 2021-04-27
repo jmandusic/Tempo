@@ -40,7 +40,6 @@ const Register = () => {
       (res) => {
         localStorage.setItem("token", res.data);
         const parsedToken = parseJwt(res.data);
-        console.log(parsedToken, parsedToken.role);
         history.push(`/home/${parsedToken.role.toLowerCase()}`);
       },
       ({ response }) => {

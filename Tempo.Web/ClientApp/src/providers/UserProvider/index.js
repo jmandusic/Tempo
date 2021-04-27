@@ -4,6 +4,7 @@ import { parseJwt } from "../../utils/jwtHelper";
 
 const token = localStorage.getItem("token");
 const tokenParsed = parseJwt(token);
+
 const initialState = {
     role: tokenParsed?.role,
     userId: tokenParsed?.userId,

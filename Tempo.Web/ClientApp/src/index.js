@@ -7,12 +7,11 @@ import "./index.css";
 import configureAxios from "./services/axios";
 import BrowserHistoryWrapper from "./utils/BrowserHistoryWrapper";
 
-const baseUrl = document.getElementsByTagName("base")[0].getAttribute("href");
 configureAxios();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename={baseUrl}>
+    <BrowserRouter>
       <BrowserHistoryWrapper>
         <App />
       </BrowserHistoryWrapper>
