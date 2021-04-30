@@ -48,9 +48,9 @@ namespace Tempo.Domain.Repositories.Implementations
             return ResponseResult.Ok;
         }
 
-        public Gym EditGym(int gymId, GymModel gymModel)
+        public Gym EditGym(GymModel gymModel)
         {
-            var gym = _dbContext.Gyms.Find(gymId);
+            var gym = _dbContext.Gyms.Find(gymModel.Id);
 
             gym.Name = gymModel.Name;
             gym.Rating = gymModel.Rating;
