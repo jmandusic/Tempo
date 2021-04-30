@@ -18,20 +18,6 @@ namespace Tempo.Domain.Repositories.Implementations
             _dbContext = dbContext;
         }
 
-        public ResponseResult AddMember(int userId, int gymId)
-        {
-            var newGymUser = new GymUser
-            {
-                GymId = gymId,
-                RegularUserId = userId,
-            };
-
-            _dbContext.GymUsers.Add(newGymUser);
-            _dbContext.SaveChanges();
-
-            return ResponseResult.Ok;
-        }
-
         public ResponseResult DeleteMember(int userId)
         {
             var user = _dbContext.GymUsers.First(gu => gu.RegularUserId == userId);

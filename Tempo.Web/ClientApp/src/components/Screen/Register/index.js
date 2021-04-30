@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { parseJwt } from "../../../utils/jwtHelper";
 
 const Register = () => {
-  const history = useHistory();
+  const [role, setRole] = useState(null);
   const [repatedPassword, setRepeatedPassword] = useState("");
   const [backendMessage, setBackendMessage] = useState("");
   const [user, setUser] = useState({
@@ -29,7 +29,7 @@ const Register = () => {
     setRepeatedPassword(e.target.value);
   };
 
-  const submit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (user.password !== repatedPassword) {
@@ -40,7 +40,7 @@ const Register = () => {
       (res) => {
         localStorage.setItem("token", res.data);
         const parsedToken = parseJwt(res.data);
-        history.push(`/home/${parsedToken.role.toLowerCase()}`);
+        setRole(parsedToken.role);
       },
       ({ response }) => {
         setBackendMessage(response.data);
@@ -48,9 +48,13 @@ const Register = () => {
     );
   };
 
+  if (role) {
+    return <Redirect to={`/home/${role.toLowerCase()}`} />;
+  }
+
   return (
     <section>
-      <form onSubmit={submit}>
+      <form onSubmit={handleSubmit}>
         <label>Name</label>
         <input required type="text" onChange={nameHanlder} value={user.name} />
 

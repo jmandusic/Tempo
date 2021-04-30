@@ -37,9 +37,9 @@ namespace Tempo.Domain.Repositories.Implementations
             return ResponseResult.Ok;
         }
 
-        public Employee EditEmployee(int employeeId, EmployeeModel employeeModel)
+        public Employee EditEmployee(EmployeeModel employeeModel)
         {
-            var employee = _dbContext.Employees.Find(employeeId);
+            var employee = _dbContext.Employees.Find(employeeModel.Id);
             employee.Id = employeeModel.Id;
             employee.Name = employeeModel.Name;
             employee.Email = employeeModel.Email;
@@ -84,17 +84,6 @@ namespace Tempo.Domain.Repositories.Implementations
                 return new List<RegularUser>();
 
             return gymMembers;
-        }
-
-        public float GetTotalProfit(int gymId)
-        {
-            var gymMembersNumber = _dbContext.RegularUsers
-                .Include(gu => gu.GymUsers.Where(gu => gu.GymId == gymId))
-                .ToList()
-                .Count();
-
-            var gym = _dbContext.Gyms.Find(gymId);
-            return (float)gymMembersNumber * gym.MembershipFee;
         }
     }
 }

@@ -8,10 +8,9 @@ namespace Tempo.Domain.Repositories.Interfaces
     public interface IAdminRepository
     {
         ResponseResult AddEmployee(EmployeeModel employeeModel);
-        Employee EditEmployee(int employeeId, EmployeeModel employeeModel);
+        Employee EditEmployee(EmployeeModel employeeModel);
         ResponseResult DeleteEmployee(int employeeId);
         ICollection<Employee> GetAllGymEmployees(int gymId);
         ICollection<RegularUser> GetAllGymUsers(int gymId);
-        float GetTotalProfit(int gymId);
     }
 }

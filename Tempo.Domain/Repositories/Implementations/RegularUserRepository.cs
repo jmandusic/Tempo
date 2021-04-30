@@ -34,6 +34,20 @@ namespace Tempo.Domain.Repositories.Implementations
             return new ResponseResult<RegularUser>(regularUser);
         }
 
+        public ResponseResult JoinGym(int userId, int gymId)
+        {
+            var newGymUser = new GymUser
+            {
+                GymId = gymId,
+                RegularUserId = userId,
+            };
+
+            _dbContext.GymUsers.Add(newGymUser);
+            _dbContext.SaveChanges();
+
+            return ResponseResult.Ok;
+        }
+
         public ResponseResult PayMembership(int userId, int gymId)
         {
             var user = _dbContext.RegularUsers.Find(userId);
