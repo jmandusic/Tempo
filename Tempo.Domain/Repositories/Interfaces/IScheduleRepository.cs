@@ -5,6 +5,6 @@ namespace Tempo.Domain.Repositories.Interfaces
 {
     public interface IScheduleRepository
     {
-        ResponseResult ReserveSchedule(ScheduleModel scheduleModel, RegularUserModel regularUser);
+        ResponseResult ReserveSchedule(ScheduleModel scheduleModel, int userId);
     }
 }

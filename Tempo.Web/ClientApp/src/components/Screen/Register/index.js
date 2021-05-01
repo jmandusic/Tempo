@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { parseJwt } from "../../../utils/jwtHelper";
+import { useUser } from "../../../providers/UserProvider/hooks";
 
 const Register = () => {
-  const [role, setRole] = useState(null);
+  const [{ role, userId }, setState] = useUser();
   const [repatedPassword, setRepeatedPassword] = useState("");
   const [backendMessage, setBackendMessage] = useState("");
   const [user, setUser] = useState({
@@ -40,7 +41,11 @@ const Register = () => {
       (res) => {
         localStorage.setItem("token", res.data);
         const parsedToken = parseJwt(res.data);
-        setRole(parsedToken.role);
+        setState((prevState) => ({
+          ...prevState,
+          role: parsedToken.role,
+          userId: parsedToken.userId,
+        }));
       },
       ({ response }) => {
         setBackendMessage(response.data);
@@ -49,7 +54,7 @@ const Register = () => {
   };
 
   if (role) {
-    return <Redirect to={`/home/${role.toLowerCase()}`} />;
+    return <Redirect to="/home" />;
   }
 
   return (

@@ -1,5 +1,5 @@
-const RegularUser = ({user}) => {
-    return <div style="width: 100vw; height: 100vh; background-color: green">{user.name}</div>;
+const RegularUser = () => {
+    return <h1 style={{ backgroundColor: "red" }}>RAADI</h1>;
 };
 
 export default RegularUser;

@@ -17,9 +17,9 @@ namespace Tempo.Domain.Repositories.Implementations
             _dbContext = dbContext;
         }
 
-        public ResponseResult ReserveSchedule(ScheduleModel scheduleModel, RegularUserModel regularUser)
+        public ResponseResult ReserveSchedule(ScheduleModel scheduleModel, int userId)
         {
-            var user = _dbContext.RegularUsers.FirstOrDefault(u => u.Id == regularUser.Id);
+            var user = _dbContext.RegularUsers.FirstOrDefault(u => u.Id == userId);
             if (user == null)
                 return ResponseResult.Error("User not found");
 

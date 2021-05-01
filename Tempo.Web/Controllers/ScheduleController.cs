@@ -16,9 +16,9 @@ namespace Tempo.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult<string> ReserveSchedule(ScheduleModel scheduleModel, RegularUserModel userModel)
+        public ActionResult<string> ReserveSchedule(ScheduleModel scheduleModel, int userId)
         {
-            var response = _scheduleRepository.ReserveSchedule(scheduleModel, userModel);
+            var response = _scheduleRepository.ReserveSchedule(scheduleModel, userId);
 
             if (response.IsError)
                 return BadRequest(response.Message);

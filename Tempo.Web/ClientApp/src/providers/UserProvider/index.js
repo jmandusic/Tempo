@@ -4,33 +4,23 @@ import { parseJwt } from "../../utils/jwtHelper";
 
 const token = localStorage.getItem("token");
 const tokenParsed = parseJwt(token);
-console.log(tokenParsed);
 
 const initialState = {
-    role: tokenParsed?.role,
-    userId: tokenParsed?.userId,
+  role: tokenParsed?.role,
+  userId: tokenParsed?.userId,
 };
 
 export const UserContext = createContext({
   state: { ...initialState },
-  logOut: () => {},
+  setState: () => {},
 });
 
 const UserProvider = ({ children }) => {
-  const history = useHistory();
-  const [role, setRole] = useState(initialState.role);
-  const [userId, setUserId] = useState(initialState.userId);
-
-  const logOut = () => {
-    localStorage.removeItem("token");
-    setRole(null);
-    setUserId(null);
-    history.push("/login");
-  };
+  const [{ role, userId }, setState] = useState(initialState);
 
   const value = {
     state: { role, userId },
-    logOut,
+    setState,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

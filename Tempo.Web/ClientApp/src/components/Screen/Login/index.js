@@ -2,9 +2,10 @@ import { Link, Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { parseJwt } from "../../../utils/jwtHelper";
+import { useUser } from "../../../providers/UserProvider/hooks";
 
 const Login = () => {
-  const [role, setRole] = useState(null);
+  const [{role, userId}, setState] = useUser();
   const [backendMessage, setBackendMessage] = useState("");
   const [user, setUser] = useState({
     email: "",
@@ -26,14 +27,18 @@ const Login = () => {
       (res) => {
         localStorage.setItem("token", res.data);
         const parsedToken = parseJwt(res.data);
-        setRole(parsedToken.role);
+        setState((prevState) => ({
+          ...prevState,
+          role: parsedToken.role,
+          userId: parsedToken.userId,
+        }));
       },
       ({ response }) => setBackendMessage(response.data)
     );
   };
 
   if (role) {
-    return <Redirect to={`/home/${role.toLowerCase()}`} />;
+    return <Redirect to="/home" />;
   }
 
   return (

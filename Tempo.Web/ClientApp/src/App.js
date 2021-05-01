@@ -8,36 +8,24 @@ import Register from "./components/Screen/Register";
 import UserProvider from "./providers/UserProvider";
 
 const App = () => {
-  const [screen, setScreen] = useState(false);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setScreen(true);
-  //   }, 3000);
-  // }, []);
-
-  // if (!screen) {
-  //   return <LandingPage />;
-  // }
-
   return (
-    <Switch>
-      <Route exact path="/login">
-        <Login />
-      </Route>
+    <UserProvider>
+      <Switch>
+        <Route exact path="/login">
+          <Login />
+        </Route>
 
-      <Route exact path="/register">
-        <Register />
-      </Route>
+        <Route exact path="/register">
+          <Register />
+        </Route>
 
-      <Route exact path="/home">
-        <UserProvider>
+        <Route exact path="/home">
           <Home />
-        </UserProvider>
-      </Route>
+        </Route>
 
-      <Redirect to="/home" />
-    </Switch>
+        <Redirect to="/home" />
+      </Switch>
+    </UserProvider>
   );
 };
 

@@ -37,7 +37,6 @@ const configureAxios = () => {
         originalRequest._isRetryRequest = true;
 
         return newToken(token).then((res) => {
-          console.log(res.data);
           if (!res.data) {
             handleRedirectToLogin();
             return;
