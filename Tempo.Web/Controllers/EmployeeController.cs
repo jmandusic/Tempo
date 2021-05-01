@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Tempo.Data.Entities.Models;
+using Tempo.Domain.Models.ViewModels;
 using Tempo.Domain.Repositories.Interfaces;
 using Tempo.Web.Infrastructure;
 
@@ -17,10 +18,10 @@ namespace Tempo.Web.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        [HttpGet(nameof(MembershipPayedInCash))]
-        public ActionResult<string> MembershipPayedInCash(int userId, int gymId)
+        [HttpPut(nameof(MembershipPayedInCash))]
+        public ActionResult<string> MembershipPayedInCash(MembershipPayedModel model)
         {
-            var response = _employeeRepository.MembershipPayedInCash(userId, gymId);
+            var response = _employeeRepository.MembershipPayedInCash(model.UserId, model.GymId);
 
             if (response.IsError)
                 return response.Message;
@@ -29,14 +30,14 @@ namespace Tempo.Web.Controllers
         }
 
         [HttpGet(nameof(CheckMemberships))]
-        public ActionResult<ICollection<RegularUser>> CheckMemberships(int gymId)
+        public ActionResult<ICollection<RegularUser>> CheckMemberships([FromQuery] int gymId)
         {
             var usersWithUnpayedMembership = _employeeRepository.CheckMemberships(gymId);
             return Ok(usersWithUnpayedMembership);
         }
 
         [HttpDelete(nameof(DeleteMember))]
-        public ActionResult<string> DeleteMember(int userId)
+        public ActionResult<string> DeleteMember([FromQuery] int userId)
         {
             var response = _employeeRepository.DeleteMember(userId);
 

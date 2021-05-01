@@ -22,7 +22,7 @@ const configureAxios = () => {
     (error) => {
       let originalRequest = error.config;
       const token = localStorage.getItem("token");
-      
+
       if (error.response && error.response.status === 401 && !token) {
         history.push("/login");
 

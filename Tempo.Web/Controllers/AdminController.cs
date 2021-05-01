@@ -19,14 +19,14 @@ namespace Tempo.Web.Controllers
 
 
         [HttpGet(nameof(GetAllGymUsers))]
-        public ActionResult<RegularUserModel> GetAllGymUsers(int gymId)
+        public ActionResult<RegularUserModel> GetAllGymUsers([FromQuery] int gymId)
         {
             return Ok(_adminRepository.GetAllGymUsers(gymId));
         }
 
 
         [HttpGet(nameof(GetAllGymEmployees))]
-        public ActionResult<ICollection<GymModel>> GetAllGymEmployees(int gymId)
+        public ActionResult<ICollection<GymModel>> GetAllGymEmployees([FromQuery] int gymId)
         {
             return Ok(_adminRepository.GetAllGymEmployees(gymId));
         }

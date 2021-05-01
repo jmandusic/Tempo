@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tempo.Domain.Models.ViewModels;
 using Tempo.Domain.Repositories.Interfaces;
 using Tempo.Web.Infrastructure;
 
@@ -15,16 +16,16 @@ namespace Tempo.Web.Controllers
             _regularUserRepository = regularUserRepository;
         }
 
-        [HttpPost]
-        public IActionResult JoinGym(int userId, int gymId)
+        [HttpPost(nameof(JoinGym))]
+        public IActionResult JoinGym(JoinGymModel model)
         {
-            return Ok(_regularUserRepository.JoinGym(userId, gymId));
+            return Ok(_regularUserRepository.JoinGym(model.UserId, model.GymId));
         }
 
-        [HttpPost]
-        public IActionResult PayMembership(int userId, int gymId)
+        [HttpPost(nameof(PayMembership))]
+        public IActionResult PayMembership(PayMembershipModel model)
         {
-            return Ok(_regularUserRepository.PayMembership(userId, gymId));
+            return Ok(_regularUserRepository.PayMembership(model.UserId, model.GymId));
         }
     }
 }

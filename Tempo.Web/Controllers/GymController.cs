@@ -18,7 +18,7 @@ namespace Tempo.Web.Controllers
             _gymRepository = gymRepository;
         }
 
-        [Authorize(Policy = Policies.RegularUser)]
+        [AllowAnonymous]
         [HttpGet(nameof(GetAllGyms))]
         public ActionResult<ICollection<Gym>> GetAllGyms()
         {
@@ -56,9 +56,9 @@ namespace Tempo.Web.Controllers
 
         [AllowAnonymous]
         [HttpGet(nameof(CheckGymCapacity))]
-        public ActionResult<int?> CheckGymCapacity(int gymId, DateTime date)
+        public ActionResult<int?> CheckGymCapacity(CheckGymCapacityModel model)
         {
-            var capacity = _gymRepository.CheckGymCapacity(gymId, date);
+            var capacity = _gymRepository.CheckGymCapacity(model.GymId, model.Date);
 
             if (capacity == null)
                 return BadRequest();
@@ -69,9 +69,9 @@ namespace Tempo.Web.Controllers
 
         [Authorize(Policy = Policies.RegularUser)]
         [HttpGet(nameof(SeeFriendsInGym))]
-        public ActionResult<ICollection<RegularUser>> SeeFriendsInGym(int userId, int gymId)
+        public ActionResult<ICollection<RegularUser>> SeeFriendsInGym(SeeFriendsInGymModel model)
         {
-            return Ok(_gymRepository.SeeFriendsInGym(userId, gymId));
+            return Ok(_gymRepository.SeeFriendsInGym(model.UserId, model.GymId));
         }
     }
 }

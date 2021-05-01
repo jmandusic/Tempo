@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Tempo.Data.Entities.Models;
 using Tempo.Domain.Models.ViewModels;
 using Tempo.Domain.Models.ViewModels.Account;
 using Tempo.Domain.Repositories.Interfaces;
@@ -58,6 +59,16 @@ namespace Tempo.Web.Controllers
             {
                 return Unauthorized();
             }
+
+            return Ok(user);
+        }
+
+        [HttpGet(nameof(GetUser))]
+        public ActionResult<User> GetUser([FromQuery] int userId)
+        {
+            var user = _userRepository.GetUser(userId);
+            if (user == null)
+                return BadRequest();
 
             return Ok(user);
         }

@@ -19,7 +19,7 @@ namespace Tempo.Web.Controllers
 
         [AllowAnonymous]
         [HttpGet(nameof(GetUnOpenedNotificationsForUser))]
-        public ActionResult<ICollection<Notification>> GetUnOpenedNotificationsForUser(int userId)
+        public ActionResult<ICollection<Notification>> GetUnOpenedNotificationsForUser([FromQuery] int userId)
         {
             return Ok(_notificationRepository
                 .GetUnOpenedNotificationsForUser(userId));
@@ -33,10 +33,10 @@ namespace Tempo.Web.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost(nameof(OpenNotification))]
-        public ActionResult<string> OpenNotification(int userId, int notificationId)
+        [HttpPut(nameof(OpenNotification))]
+        public ActionResult<string> OpenNotification(OpenNotificationModel model)
         {
-            var response = _notificationRepository.OpenNotification(userId, notificationId);
+            var response = _notificationRepository.OpenNotification(model.UserId, model.NotificationId);
 
             if (response.IsError)
                 return BadRequest(response.Message);

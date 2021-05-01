@@ -9,7 +9,7 @@ export const useUser = () => {
   const {
     state: { role, userId },
     setState,
-  } = useContext(UserContext);
+  } = useUserContext();
 
   return [{ role, userId }, setState];
 };
