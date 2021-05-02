@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useGyms } from "../../../providers/GymProvider/hooks";
 import { useUser } from "../../../providers/UserProvider/hooks";
+import Map from "./Map";
 import axios from "axios";
+import "./index.css";
 
 const RegularUser = () => {
-  const [gyms, setGyms] = useGyms();
   const [{ role, userId }, setState] = useUser();
   const [user, setUser] = useState({});
 
@@ -23,7 +24,7 @@ const RegularUser = () => {
     return <div>Loading...</div>;
   }
 
-  return <div>{user.name}</div>;
+  return <Map />;
 };
 
 export default RegularUser;
