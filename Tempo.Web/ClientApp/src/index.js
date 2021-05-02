@@ -6,7 +6,6 @@ import App from "./App";
 import "./index.css";
 import configureAxios from "./services/axios";
 import BrowserHistoryWrapper from "./utils/BrowserHistoryWrapper";
-import RegularUser from "./components/Authorized/RegularUser";
 
 configureAxios();
 

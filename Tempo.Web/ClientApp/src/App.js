@@ -5,7 +5,6 @@ import LandingPage from "./components/LandingPage";
 import Home from "./components/Screen/Home";
 import Login from "./components/Screen/Login";
 import Register from "./components/Screen/Register";
-import GymProvider from "./providers/GymProvider";
 import UserProvider from "./providers/UserProvider";
 
 const App = () => {
@@ -33,9 +32,7 @@ const App = () => {
         </Route>
 
         <Route exact path="/home">
-          <GymProvider>
             <Home />
-          </GymProvider>
         </Route>
 
         <Redirect to="/home" />
