@@ -5,6 +5,7 @@ import { parseJwt } from "../../../utils/jwtHelper";
 import { useUser } from "../../../providers/UserProvider/hooks";
 import TooglePassword from "../../../assets/TooglePassword.svg";
 import TempoText from "../../../assets/TempoText.svg";
+import FormPicture from "../../../assets/FormPicture.svg";
 
 import "./Login.css";
 
@@ -56,7 +57,13 @@ const Login = () => {
 
   return (
     <section className="login-layout">
-      <section className="login__desktop"></section>
+      <section className="login__desktop">
+        <img className="tempo" src={TempoText} />
+        <img className="background" src={FormPicture} />
+        <h1 className="header">
+          Prati svoj <span className="underlined">Tempo</span>
+        </h1>
+      </section>
 
       <section className="section__login">
         <h2 className="login__title">Prijavi se</h2>

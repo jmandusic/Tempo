@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <BrowserHistoryWrapper>
-        <Map />
+        <App />
       </BrowserHistoryWrapper>
     </BrowserRouter>
   </React.StrictMode>,

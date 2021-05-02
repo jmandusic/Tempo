@@ -4,6 +4,8 @@ import { Link, Redirect } from "react-router-dom";
 import { parseJwt } from "../../../utils/jwtHelper";
 import { useUser } from "../../../providers/UserProvider/hooks";
 import TooglePassword from "../../../assets/TooglePassword.svg";
+import TempoText from "../../../assets/TempoText.svg";
+import FormPicture from "../../../assets/FormPicture.svg";
 import "./Register.css";
 
 const Register = () => {
@@ -69,72 +71,82 @@ const Register = () => {
   }
 
   return (
-    <section className="section__register">
-      <h2 className="register__title">Registriraj se</h2>
-      <form className="register__form" onSubmit={handleSubmit}>
-        <label className="form__label--register">Korisničko ime</label>
-        <input
-          className="form__input--register"
-          required
-          type="text"
-          onChange={nameHanlder}
-          value={user.name}
-        />
+    <section className="register-layout">
+      <section className="register__desktop">
+        <img className="tempo" src={TempoText} />
+        <img className="background" src={FormPicture} />
+        <h1 className="header">
+          Prati svoj <span className="underlined">Tempo</span>
+        </h1>
+      </section>
 
-        <label className="form__label--register">Email</label>
-        <input
-          className="form__input--register"
-          required
-          type="email"
-          onChange={emailHanlder}
-          value={user.email}
-        />
-
-        <label className="form__label--register">
-          Lozinka{" "}
-          <img
-            className="toogle__password--register"
-            alt="Toogle Password"
-            src={TooglePassword}
-            onClick={() => handleTooglePassword(1)}
+      <section className="section__register">
+        <h2 className="register__title">Registriraj se</h2>
+        <form className="register__form" onSubmit={handleSubmit}>
+          <label className="form__label--register">Korisničko ime</label>
+          <input
+            className="form__input--register"
+            required
+            type="text"
+            onChange={nameHanlder}
+            value={user.name}
           />
-        </label>
-        <input
-          className="form__input--register password1"
-          required
-          min="4"
-          max="12"
-          type="password"
-          onChange={passwordHanlder}
-          value={user.password}
-        />
 
-        <label className="form__label--register">
-          Potvrdi lozinku{" "}
-          <img
-            className="toogle__password--register"
-            alt="Toogle Password"
-            src={TooglePassword}
-            onClick={() => handleTooglePassword(2)}
+          <label className="form__label--register">Email</label>
+          <input
+            className="form__input--register"
+            required
+            type="email"
+            onChange={emailHanlder}
+            value={user.email}
           />
-        </label>
-        <input
-          className="form__input--register password2"
-          required
-          type="password"
-          onChange={repatedPasswordHandler}
-          value={repatedPassword}
-        />
 
-        <p>{backendMessage}</p>
+          <label className="form__label--register">
+            Lozinka{" "}
+            <img
+              className="toogle__password--register"
+              alt="Toogle Password"
+              src={TooglePassword}
+              onClick={() => handleTooglePassword(1)}
+            />
+          </label>
+          <input
+            className="form__input--register password1"
+            required
+            min="4"
+            max="12"
+            type="password"
+            onChange={passwordHanlder}
+            value={user.password}
+          />
 
-        <button className="form__submit--register" type="submit">
-          Registriraj se
-        </button>
-      </form>
-      <Link to="/login">
-        <p className="login">Već imaš račun? Prijavi se.</p>
-      </Link>
+          <label className="form__label--register">
+            Potvrdi lozinku{" "}
+            <img
+              className="toogle__password--register"
+              alt="Toogle Password"
+              src={TooglePassword}
+              onClick={() => handleTooglePassword(2)}
+            />
+          </label>
+          <input
+            className="form__input--register password2"
+            required
+            type="password"
+            onChange={repatedPasswordHandler}
+            value={repatedPassword}
+          />
+
+          <p>{backendMessage}</p>
+
+          <button className="form__submit--register" type="submit">
+            Registriraj se
+          </button>
+        </form>
+        <Link to="/login">
+          <p className="login">Već imaš račun? Prijavi se.</p>
+        </Link>
+      </section>
     </section>
   );
 };

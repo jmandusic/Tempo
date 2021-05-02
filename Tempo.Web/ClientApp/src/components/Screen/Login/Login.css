@@ -77,3 +77,59 @@
   src: url(../../../assets/fonts/Roboto/Roboto-Bold.ttf);
 }
 
+@media screen and (min-width: 768px) {
+  .login-layout {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 0;
+    width: 100%;
+    max-width: 1440px;
+  }
+
+  .login__desktop {
+    position: relative;
+    margin: 0;
+    display: flex;
+    width: 50%;
+    height: 100vh;
+  }
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .tempo {
+    z-index: 2;
+    position: absolute;
+    width: 151.07px;
+    height: 51px;
+    left: 216px;
+    top: 104px;
+  }
+
+  .header {
+    z-index: 3;
+    position: absolute;
+    left: 150px;
+    top: 220px;
+    color: #ffffff;
+    font-size: 72px;
+    max-width: 309px;
+  }
+
+  .underlined {
+    text-decoration: underline #3ceb94;
+  }
+
+  .section__login {
+    width: 50%;
+  }
+
+  .login__form {
+    max-width: 450px;
+  }
+}
