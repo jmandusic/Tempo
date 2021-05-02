@@ -9,6 +9,18 @@ import GymProvider from "./providers/GymProvider";
 import UserProvider from "./providers/UserProvider";
 
 const App = () => {
+  const [screen, setScreen] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setScreen(true);
+    }, 5000);
+  }, []);
+
+  if (!screen) {
+    return <LandingPage />;
+  }
+
   return (
     <UserProvider>
       <Switch>

@@ -1,11 +1,15 @@
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { parseJwt } from "../../../utils/jwtHelper";
 import { useUser } from "../../../providers/UserProvider/hooks";
+import TooglePassword from "../../../assets/TooglePassword.svg";
+import TempoText from "../../../assets/TempoText.svg";
+
+import "./Login.css";
 
 const Login = () => {
-  const [{role, userId}, setState] = useUser();
+  const [{ role, userId }, setState] = useUser();
   const [backendMessage, setBackendMessage] = useState("");
   const [user, setUser] = useState({
     email: "",
@@ -18,6 +22,15 @@ const Login = () => {
 
   const passwordHanlder = (e) => {
     setUser((prevState) => ({ ...prevState, password: e.target.value }));
+  };
+
+  const handleTooglePassword = () => {
+    const input = document.querySelector(".password");
+    if (input.type === "password") {
+      input.type = "text";
+    } else {
+      input.type = "password";
+    }
   };
 
   const handleSubmit = (e) => {
@@ -42,25 +55,46 @@ const Login = () => {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type="email" value={user.email} onChange={emailHanlder} />
+    <section className="login-layout">
+      <section className="login__desktop"></section>
 
-        <label>Password</label>
-        <input
-          type="password"
-          value={user.password}
-          onChange={passwordHanlder}
-        />
+      <section className="section__login">
+        <h2 className="login__title">Prijavi se</h2>
+        <form className="login__form" onSubmit={handleSubmit}>
+          <label className="form__label--login">Email</label>
+          <input
+            className="form__input--login"
+            type="email"
+            value={user.email}
+            onChange={emailHanlder}
+          />
 
-        <p>{backendMessage}</p>
+          <label className="form__label--login">
+            Lozinka{" "}
+            <img
+              className="toogle__password--login"
+              alt="Toogle Password"
+              src={TooglePassword}
+              onClick={handleTooglePassword}
+            />
+          </label>
+          <input
+            className="form__input--login password"
+            type="password"
+            value={user.password}
+            onChange={passwordHanlder}
+          />
 
-        <button type="submit">Log in</button>
-      </form>
-      <Link to="/register">
-        <p>Još uvijek nemaš račun? Registriraj se.</p>
-      </Link>
+          <p>{backendMessage}</p>
+
+          <button className="form__submit--login" type="submit">
+            Prijavi se
+          </button>
+        </form>
+        <Link to="/register">
+          <p className="register">Još uvijek nemaš račun? Registriraj se.</p>
+        </Link>
+      </section>
     </section>
   );
 };

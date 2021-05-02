@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { parseJwt } from "../../../utils/jwtHelper";
 import { useUser } from "../../../providers/UserProvider/hooks";
+import TooglePassword from "../../../assets/TooglePassword.svg";
+import "./Register.css";
 
 const Register = () => {
   const [{ role, userId }, setState] = useUser();
@@ -28,6 +30,15 @@ const Register = () => {
 
   const repatedPasswordHandler = (e) => {
     setRepeatedPassword(e.target.value);
+  };
+
+  const handleTooglePassword = (id) => {
+    const input = document.querySelector(`.password${id}`);
+    if (input.type === "password") {
+      input.type = "text";
+    } else {
+      input.type = "password";
+    }
   };
 
   const handleSubmit = (e) => {
@@ -58,21 +69,38 @@ const Register = () => {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <label>Name</label>
-        <input required type="text" onChange={nameHanlder} value={user.name} />
-
-        <label>Email</label>
+    <section className="section__register">
+      <h2 className="register__title">Registriraj se</h2>
+      <form className="register__form" onSubmit={handleSubmit}>
+        <label className="form__label--register">Korisničko ime</label>
         <input
+          className="form__input--register"
+          required
+          type="text"
+          onChange={nameHanlder}
+          value={user.name}
+        />
+
+        <label className="form__label--register">Email</label>
+        <input
+          className="form__input--register"
           required
           type="email"
           onChange={emailHanlder}
           value={user.email}
         />
 
-        <label>Password</label>
+        <label className="form__label--register">
+          Lozinka{" "}
+          <img
+            className="toogle__password--register"
+            alt="Toogle Password"
+            src={TooglePassword}
+            onClick={() => handleTooglePassword(1)}
+          />
+        </label>
         <input
+          className="form__input--register password1"
           required
           min="4"
           max="12"
@@ -81,8 +109,17 @@ const Register = () => {
           value={user.password}
         />
 
-        <label>Repeat password</label>
+        <label className="form__label--register">
+          Potvrdi lozinku{" "}
+          <img
+            className="toogle__password--register"
+            alt="Toogle Password"
+            src={TooglePassword}
+            onClick={() => handleTooglePassword(2)}
+          />
+        </label>
         <input
+          className="form__input--register password2"
           required
           type="password"
           onChange={repatedPasswordHandler}
@@ -91,10 +128,12 @@ const Register = () => {
 
         <p>{backendMessage}</p>
 
-        <button type="submit">Registriraj se</button>
+        <button className="form__submit--register" type="submit">
+          Registriraj se
+        </button>
       </form>
       <Link to="/login">
-        <p>Već imaš račun? Prijavi se.</p>
+        <p className="login">Već imaš račun? Prijavi se.</p>
       </Link>
     </section>
   );

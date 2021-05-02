@@ -6,6 +6,7 @@ import App from "./App";
 import "./index.css";
 import configureAxios from "./services/axios";
 import BrowserHistoryWrapper from "./utils/BrowserHistoryWrapper";
+import Map from "./components/Authorized/RegularUser/Map";
 
 configureAxios();
 
@@ -13,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <BrowserHistoryWrapper>
-        <App />
+        <Map />
       </BrowserHistoryWrapper>
     </BrowserRouter>
   </React.StrictMode>,

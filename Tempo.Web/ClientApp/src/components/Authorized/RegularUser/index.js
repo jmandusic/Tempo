@@ -9,14 +9,14 @@ const RegularUser = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`api/Account/GetUser?userId=${userId}`)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        alert("Fething user unsuccesfull");
-      });
+    // axios
+    //   .get(`api/Account/GetUser?userId=${userId}`)
+    //   .then((res) => {
+    //     setUser(res.data);
+    //   })
+    //   .catch(() => {
+    //     alert("Fething user unsuccesfull");
+    //   });
   }, []);
 
   if (!user) {

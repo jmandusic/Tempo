@@ -1,5 +1,19 @@
 body {
-  width: 100vw;
-  height: 100vh;
+  overflow: hidden;
   margin: 0;
+  font-family: "Roboto";
+  background-color: #222222;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  outline: none;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url(./assets/fonts/Roboto/Roboto-Medium.ttf);
 }
